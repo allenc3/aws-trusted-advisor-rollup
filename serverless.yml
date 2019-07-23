@@ -1,0 +1,61 @@
+service: ${self:custom.service}
+
+provider:
+  name: aws
+  runtime: python3.7
+  region: ${opt:region, self:custom.region}
+
+  environment:
+    ACCOUNT_ID: ${self:custom.accountId}
+    BUCKET_NAME: ${self:custom.bucketName}
+    DYNAMO_NAME: ${self:custom.dynamoName}
+    QUEUE_NAME: ${self:custom.queueName}
+    BASE_ROLE: ${self:custom.baseRole}
+
+package:
+  individually: true
+  exclude:
+    - node_modules/**
+
+functions:
+  getAccountsostest:
+    handler: fetch_accounts.handler
+    role: arn:aws:iam::${self:custom.accountId}:role/${self:custom.executionRole}
+    events:
+      - schedule:
+          rate: ${self:custom.cronGetAccounts}
+          enabled: True
+
+  runChecksForAccountostest:
+    handler: run_checks.handler
+    role: arn:aws:iam::${self:custom.accountId}:role/${self:custom.executionRole}
+    events:
+      - sqs:
+          arn: arn:aws:sqs:${self:custom.region}:${self:custom.accountId}:${self:custom.queueName}
+          batchSize: 1
+
+resources:
+  Resources:
+    accountsQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: ${self:custom.queueName}
+    s3Bucket:
+      Type: "AWS::S3::Bucket"
+      Properties:
+        BucketName: ${self:custom.bucketName}
+
+custom:
+  service: None
+  region: None
+  accountId: None # Must match account id deploying from
+  queueName: None
+  bucketName: None
+  cronSchedule: None
+  dynamoName: None
+  baseRole: None
+  executionRole: None
+
+
+plugins:
+  - serverless-python-requirements
