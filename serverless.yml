@@ -18,15 +18,15 @@ package:
     - node_modules/**
 
 functions:
-  getAccountsostest:
+  getAccounts:
     handler: fetch_accounts.handler
     role: arn:aws:iam::${self:custom.accountId}:role/${self:custom.executionRole}
     events:
       - schedule:
-          rate: ${self:custom.cronGetAccounts}
+          rate: ${self:custom.cronSchedule}
           enabled: True
 
-  runChecksForAccountostest:
+  runChecksForAccounts:
     handler: run_checks.handler
     role: arn:aws:iam::${self:custom.accountId}:role/${self:custom.executionRole}
     events:

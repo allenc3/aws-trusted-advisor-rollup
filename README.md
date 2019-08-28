@@ -71,9 +71,9 @@ All variables can be found in the **custom** section within serverless.yml.
     * **Must have the 'AccountName' and 'AccountId' fields**
     * ***Optional***
 * baseRole:
-    * Base Role that should be propagated across all accounts.
+    * Base Role that should be propagated across all accounts. Just the name only, not the full ARN.
 * executionRole:
-    * Lambda execution role that will be running the lambda functions.
+    * Lambda execution role that will be running the lambda functions. Just the name only, not the full ARN.
 
 ## Permissions
 ***MAKE SURE ALL PERMISSIONS ARE SATISFIED***  
@@ -102,6 +102,7 @@ All variables can be found in the **custom** section within serverless.yml.
         * STS (Switch to other accounts)
         * SQS (Send messages to queue)
         * CloudWatch (Write logs)
+        * DynamoDB (Scan accounts table assuming you are using this)
 
 
 ## Detailed Steps

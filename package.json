@@ -4,7 +4,7 @@
   "dependencies": {},
   "devDependencies": {
     "serverless": "^1.48.2",
-    "serverless-python-requirements": "^4.3.0"
+    "serverless-python-requirements": "^5.0.0"
   },
   "repository": {
     "type": "git",
