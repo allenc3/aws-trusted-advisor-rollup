@@ -147,14 +147,14 @@ to have folders with the date as their names (*ex. 2019-07-18*), and all the CSV
 files will be named after the 'AccountName' received from SQS.
 
 We have decided to store these values in the CSV files:  
-    * Date
-    * Account id
-    * Status (Error, Warning, Ok, Not Available)
-    * Check id
-    * Check name (Currently, Trusted Advisor provides 109 checks in total)
-    * Estimated monthlysavings
-    * Account name
-    * Category (Currently, Trusted Advisor is based on 5 categories)
+* Date
+* Account id
+* Status (Error, Warning, Ok, Not Available)
+* Check id
+* Check name (Currently, Trusted Advisor provides 109 checks in total)
+* Estimated monthlysavings
+* Account name
+* Category (Currently, Trusted Advisor is based on 5 categories)
 
 # Thank you
 ### Contributors
